@@ -1,7 +1,12 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+
 export class ApiResponseDto<T> {
+  @ApiProperty()
   success: boolean;
   data: T;
+  @ApiPropertyOptional()
   message?: string;
+  @ApiProperty()
   timestamp: string;
 
   constructor(data: T, message?: string) {
@@ -13,11 +18,17 @@ export class ApiResponseDto<T> {
 }
 
 export class ApiErrorDto {
+  @ApiProperty()
   success: boolean;
+  @ApiProperty()
   statusCode: number;
+  @ApiProperty()
   message: string;
+  @ApiPropertyOptional({ type: Object })
   errors?: Record<string, string[]>;
+  @ApiProperty()
   path: string;
+  @ApiProperty()
   timestamp: string;
 
   constructor(

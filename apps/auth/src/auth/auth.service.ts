@@ -1,13 +1,11 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { LoginDto } from './dtos/requests/login.dto';
+import { LoginDto } from './dtos/login.dto';
 import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
-import { RegisterDto } from './dtos/requests/register.dto';
+import { RegisterDto } from './dtos/register.dto';
 import * as argon2 from 'argon2';
 import { InjectRepository } from '@nestjs/typeorm';
-import { LoginResponseDto } from './dtos/responses/login-response.dto';
 import { JwtModuleOptions, JwtService } from '@nestjs/jwt';
-import { plainToInstance } from 'class-transformer';
 import { JwtPayload } from '@app/auth/interfaces/jwt-payload.interface';
 import { ConfigService } from '@nestjs/config';
 
@@ -24,7 +22,7 @@ export class AuthService {
    * @param {LoginDto} loginDto
    * @returns
    */
-  async login(loginDto: LoginDto): Promise<LoginResponseDto> {
+  async login(loginDto: LoginDto) {
     const user = await this.userRepository.findOne({
       where: { email: loginDto.email },
     });
@@ -46,7 +44,7 @@ export class AuthService {
       email: user.email,
     };
 
-    const response = plainToInstance(LoginResponseDto, {
+    const response = {
       accessToken: await this.jwtService.signAsync(tokenPayload),
       // See libs/auth/src/auth-lib.module.ts:16:"// This is how" for more information
       refreshToken: await this.jwtService.signAsync(tokenPayload, {
@@ -55,7 +53,7 @@ export class AuthService {
           'jwt.refreshExpiresIn',
         ) as unknown as Required<JwtModuleOptions>['signOptions']['expiresIn'],
       }),
-    });
+    };
     return response;
   }
 

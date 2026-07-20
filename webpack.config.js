@@ -1,5 +1,8 @@
 const path = require('path');
 
+// Must be executed with `scripts/build.js`
+const appName = process.env.APP_NAME || 'auth';
+
 const root = (...parts) => path.resolve(__dirname, ...parts);
 
 module.exports = {
@@ -14,12 +17,26 @@ module.exports = {
     },
   },
 
+  // Avoid breaking Swagger
+  optimization: {
+    minimize: false,
+  },
+
   module: {
     rules: [
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        use: 'ts-loader',
+        use: {
+          loader: 'ts-loader',
+          options: {
+            configFile: path.resolve(
+              __dirname,
+              `apps/${appName}/tsconfig.app.json`,
+            ),
+            transpileOnly: true,
+          },
+        },
       },
     ],
   },

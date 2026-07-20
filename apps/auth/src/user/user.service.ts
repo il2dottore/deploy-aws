@@ -2,9 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
 import { In, Repository } from 'typeorm';
-import { BatchUsersDto } from './dtos/requests/batch-users.dto';
-import { plainToInstance } from 'class-transformer';
-import { UserProfileDto } from './dtos/responses/user-profile.dto';
+import { BatchUsersDto } from './dtos/batch-users.dto';
 
 @Injectable()
 export class UserService {
@@ -33,7 +31,7 @@ export class UserService {
    * @param {string} id - User UUID
    * @returns
    */
-  async getProfile(id: string): Promise<UserProfileDto> {
+  async getProfile(id: string) {
     const user = await this.userRepository.findOne({
       where: { id },
       relations: {
@@ -70,10 +68,10 @@ export class UserService {
       ),
     ];
 
-    return plainToInstance(UserProfileDto, {
+    return {
       user: userWithoutPassword,
       roles: roles,
       permissions: permissions,
-    });
+    };
   }
 }
