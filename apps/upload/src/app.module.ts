@@ -5,8 +5,8 @@ import { AuthLibModule } from '@app/auth';
 import { HttpExceptionFilter, TransformInterceptor } from '@app/common';
 import { DatabaseModule } from '@app/database';
 import { RedisModule } from '@app/redis';
-import { UploadController } from './upload/upload.controller';
 import { UploadModule } from './upload/upload.module';
+import { StorageModule } from '@app/storage';
 
 @Module({
   imports: [
@@ -15,6 +15,7 @@ import { UploadModule } from './upload/upload.module';
     RedisModule,
     DatabaseModule.forService('upload_service_db'),
     AuthLibModule,
+    StorageModule,
     // Service modules
     UploadModule,
   ],
@@ -22,6 +23,6 @@ import { UploadModule } from './upload/upload.module';
     { provide: APP_FILTER, useClass: HttpExceptionFilter },
     { provide: APP_INTERCEPTOR, useClass: TransformInterceptor },
   ],
-  controllers: [UploadController],
+  controllers: [],
 })
 export class AppModule {}

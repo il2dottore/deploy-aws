@@ -10,10 +10,11 @@ import { S3_CLIENT } from './s3.constants';
       inject: [ConfigService],
       useFactory: (config: ConfigService) =>
         new S3Client({
-          region: config.get<string>('aws.region')!,
+          region: config.getOrThrow<string>('s3.region'),
+          endpoint: config.get<string>('s3.endpoint'),
           credentials: {
-            accessKeyId: config.get<string>('aws.accessKeyId')!,
-            secretAccessKey: config.get<string>('aws.secretAccessKey')!,
+            accessKeyId: config.getOrThrow<string>('s3.accessKeyId'),
+            secretAccessKey: config.getOrThrow<string>('s3.secretAccessKey'),
           },
         }),
     },

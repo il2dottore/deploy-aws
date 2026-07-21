@@ -18,6 +18,9 @@ export class Upload extends BaseEntity {
   @Column({ nullable: false, length: 255 })
   fileName!: string;
 
+  @Column({ nullable: false, length: 1024 })
+  fileKey!: string;
+
   @Column({ nullable: false })
   fileSize!: number;
 
