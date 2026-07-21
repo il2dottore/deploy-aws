@@ -15,7 +15,8 @@
     "types": [
       "node",
       "jest",
-      "express"
+      "express",
+      "multer"
     ],
     "noImplicitAny": false,
     "strictBindCallApply": false,
@@ -54,6 +55,12 @@
       "@app/auth/*": [
         "./libs/auth/src/*"
       ],
+      "@app/storage": [
+        "./libs/storage/src"
+      ],
+      "@app/storage/*": [
+        "./libs/storage/src/*"
+      ]
     }
   },
   "exclude": [

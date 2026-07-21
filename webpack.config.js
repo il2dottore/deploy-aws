@@ -14,6 +14,7 @@ module.exports = {
       '@app/database': root('libs/database/src'),
       '@app/redis': root('libs/redis/src'),
       '@app/auth': root('libs/auth/src'),
+      '@app/storage': root('libs/storage/src'),
     },
   },
 
