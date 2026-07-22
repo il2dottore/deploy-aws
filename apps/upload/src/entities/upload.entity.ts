@@ -1,7 +1,14 @@
 import { BaseEntity } from '@app/common';
 import { Entity, Column } from 'typeorm';
 
-@Entity('upload')
+export enum FileStatus {
+  QUEUED = 'queued',
+  UPLOADING = 'uploading',
+  ERROR = 'error',
+  UPLOADED = 'uploaded',
+}
+
+@Entity('uploads')
 export class Upload extends BaseEntity {
   @Column({ nullable: false, type: 'text' })
   title!: string;
@@ -23,6 +30,14 @@ export class Upload extends BaseEntity {
 
   @Column({ nullable: false })
   fileSize!: number;
+
+  @Column({
+    type: 'enum',
+    enum: FileStatus,
+    default: FileStatus.QUEUED,
+    nullable: false,
+  })
+  fileStatus!: FileStatus;
 
   @Column({ nullable: false, type: 'uuid' })
   userId!: string;

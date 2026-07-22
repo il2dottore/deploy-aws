@@ -1,5 +1,5 @@
 {
-  "name": "deploy-aws",
+  "name": "nestjs-microservices",
   "version": "0.0.1",
   "description": "Project for learning AWS",
   "author": "Vo Ngoc Bao",
@@ -19,7 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "seed:auth": "ts-node -r dotenv/config -r tsconfig-paths/register scripts/seed-auth.ts"
+    "seed:auth": "ts-node -r dotenv/config -r tsconfig-paths/register scripts/seeders/auth.seeder.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1090.0",

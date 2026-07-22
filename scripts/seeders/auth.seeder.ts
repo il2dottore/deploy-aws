@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 import * as argon2 from 'argon2';
 import { DataSource } from 'typeorm';
-import { Permission } from '../apps/auth/src/entities/permission.entity';
-import { Role } from '../apps/auth/src/entities/role.entity';
-import { User } from '../apps/auth/src/entities/user.entity';
-import { UserRole } from '../apps/auth/src/entities/user-role.entity';
-import { RolePermission } from '../apps/auth/src/entities/role-permission.entity';
+import { Permission } from '../../apps/auth/src/entities/permission.entity';
+import { Role } from '../../apps/auth/src/entities/role.entity';
+import { User } from '../../apps/auth/src/entities/user.entity';
+import { UserRole } from '../../apps/auth/src/entities/user-role.entity';
+import { RolePermission } from '../../apps/auth/src/entities/role-permission.entity';
 
 const dataSource = new DataSource({
   type: 'postgres',
